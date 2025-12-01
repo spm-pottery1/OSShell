@@ -1,7 +1,9 @@
+#pragma once
+
 #include <string>
 #include <iostream>
 
-struct File {
+class File {
 private:
     int id;
     std::string fileName;
@@ -9,15 +11,16 @@ private:
     std::string owner;
     std::string permissions;
     std::string content;
-    std::string EOFMarker = "<EOF>";
 
 public:
 
     // Constructor
-    File(int fileId, const std::string& name, const std::string& path,const std::string& fileOwner, const std::string& perms, const std::string& fileContent)
-        : id(fileId), fileName(name), filePath(path), owner(fileOwner),
-          permissions(perms), content(fileContent) {
+    File(int fileId, const std::string& name, const std::string& path, const std::string& fileOwner, const std::string& perms, const std::string& fileContent)
+        : id(fileId), fileName(name), filePath(path), owner(fileOwner), content(fileContent)
+    {
+        setPermissions(perms);  // validate via setPermissions
     }
+    
     // Getters
     int getId() const {
         return id;
@@ -35,8 +38,8 @@ public:
         return owner;
     }
 
-    std::string getPermissions() const {
-        return permissions;
+    std::string getPermissions() const { 
+        return permissions; 
     }
 
     std::string getContent() const {
@@ -69,10 +72,28 @@ public:
         owner = fileOwner;
     }
 
-    void setPermissions(const std::string& perms) {
+    void setPermissions(const std::string &perms)
+    {
+        // Validate: max 3 chars, only r, w, x
+        if (perms.length() > 3)
+        {
+            std::cerr << "Error: Permissions string too long (max 3 characters)." << std::endl;
+            permissions = "rw";  // default fallback
+            return;
+        }
+        
+        for (char c : perms)
+        {
+            if (c != 'r' && c != 'w' && c != 'x')
+            {
+                permissions = "rw";  
+                return;
+            }
+        }
+        
         permissions = perms;
     }
-
+    
     void setContent(const std::string& fileContent) {
         content = fileContent;
     }
@@ -83,3 +104,4 @@ public:
 
 
 };
+

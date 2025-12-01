@@ -1,0 +1,99 @@
+[2025-11-28 20:34:47] OK | root | help | Help command executed.
+[2025-11-28 20:35:56] OK | root | help | Help command executed.
+[2025-11-28 20:35:56] OK | root | mkdir home | Mkdir command executed.
+[2025-11-28 20:35:56] OK | root | cd home | Cd command executed.
+[2025-11-28 20:35:56] OK | root | ls | Ls command executed.
+[2025-11-28 20:35:56] OK | root | touch test | Touch command executed.
+[2025-11-28 20:35:56] OK | root | echo "this is a test" >> test.txt | Echo command executed.
+[2025-11-28 20:35:56] OK | root | echo "this is a test" >> test | Echo command executed.
+[2025-11-28 20:35:56] OK | root | echo "test">>test | Echo command executed.
+[2025-11-28 20:40:33] OK | root | touch test | Touch command executed.
+[2025-11-28 20:40:33] OK | root | echo "work please" >> test.txt | Echo command executed.
+[2025-11-28 20:42:29] OK | root | ls | Ls command executed.
+[2025-11-28 21:03:06] OK | root | ls | Ls command executed.
+[2025-11-28 21:12:19] OK | root | ls | Ls command executed.
+[2025-11-28 21:14:20] OK | root | ls | Ls command executed.
+[2025-11-28 21:14:20] OK | root | mkdir documents | Mkdir command executed.
+[2025-11-28 21:14:20] OK | root | ls | Ls command executed.
+[2025-11-28 21:15:13] OK | root | ls | Ls command executed.
+[2025-11-28 21:15:13] OK | root | mkdir test | Mkdir command executed.
+[2025-11-28 21:19:01] OK | root | mkdir testmakedir | Mkdir command executed.
+[2025-11-28 21:19:23] OK | root | ls | Ls command executed.
+[2025-11-28 21:47:39] OK | root | ls | Ls command executed.
+[2025-11-28 21:47:39] OK | root | cd test.txt | Cd command executed.
+[2025-11-28 21:47:39] OK | root | cat test.txt | Cat command executed.
+[2025-11-28 21:47:39] OK | root | echo "this is a test of the cat command" >> test.txt | Echo command executed.
+[2025-11-28 21:47:39] OK | root | cat test.txt | Cat command executed.
+[2025-11-28 22:08:48] OK | root | ls | Ls command executed.
+[2025-11-28 22:08:48] OK | root | help | Help command executed.
+[2025-11-28 22:13:10] OK | root | rm test | Rm executed.
+[2025-11-28 22:13:10] OK | root | ls | Ls executed.
+[2025-11-28 23:21:18] OK | root | ls | Ls executed.
+[2025-11-28 23:21:18] OK | root | chmod +w test.txt | Chmod executed.
+[2025-11-28 23:21:18] OK | root | chmod +r test.txt | Chmod executed.
+[2025-11-28 23:24:23] OK | root | ls | Ls executed.
+[2025-11-28 23:26:35] OK | root | ls | Ls executed.
+[2025-11-28 23:26:35] OK | root | chmod +x test.txt | Chmod executed.
+[2025-11-28 23:29:40] OK | root | rm test.txt | Rm executed.
+[2025-11-28 23:29:40] OK | root | touch test_file.txt | Touch executed.
+[2025-11-28 23:29:40] OK | root | chmod +rwx test_file.txt | Chmod executed.
+[2025-11-28 23:29:40] OK | root | ls | Ls executed.
+[2025-11-28 23:29:40] OK | root | touch test | Touch executed.
+[2025-11-28 23:29:40] OK | root | ls | Ls executed.
+[2025-11-28 23:32:29] OK | root | ls | Ls executed.
+[2025-11-28 23:32:29] OK | root | chmod -wx test_file.txt | Chmod executed.
+[2025-11-28 23:34:54] OK | root | chmod -wx test_file.txt | Chmod executed.
+[2025-11-28 23:39:37] OK | root | ls | Ls executed.
+[2025-11-28 23:39:37] OK | root | touch test.txt | Touch executed.
+[2025-11-28 23:39:37] OK | root | chmod +wx test.txt | Chmod executed.
+[2025-11-28 23:46:11] OK | root | ls | Ls executed.
+[2025-11-28 23:52:44] OK | root | ls | Ls executed.
+[2025-11-28 23:54:02] OK | root | ls | Ls executed.
+[2025-11-28 23:54:02] OK | root | touch test2.txt | Touch executed.
+[2025-11-28 23:54:02] OK | root | ls | Ls executed.
+[2025-11-28 23:55:38] OK | root | ls | Ls executed.
+[2025-11-28 23:56:31] OK | root | chmod -w test2.txt | Chmod executed.
+[2025-11-30 17:34:45] OK | root | ls | Ls executed.
+[2025-11-30 17:39:51] OK | root | ls | Ls executed.
+[2025-11-30 17:39:51] OK | root | chmod +wx new_file1 | Chmod executed.
+[2025-11-30 17:39:51] OK | root | ls | Ls executed.
+[2025-11-30 17:40:15] OK | root | ls | Ls executed.
+[2025-11-30 17:42:59] OK | root | ls | Ls executed.
+[2025-11-30 17:42:59] OK | root | chmod +wx exec_test.txt | Chmod executed.
+[2025-11-30 17:42:59] OK | root | chmod +w exec_test.txt | Chmod executed.
+[2025-11-30 17:46:51] OK | root | ls | Ls executed.
+[2025-11-30 17:46:51] OK | root | chmod +w new_file1 | Chmod executed.
+[2025-11-30 17:47:22] OK | root | ls | Ls executed.
+[2025-11-30 17:51:49] OK | root | ls | Ls executed.
+[2025-11-30 17:51:49] OK | root | chmod +x new_file1 | Chmod executed.
+[2025-11-30 17:52:15] OK | root | ls | Ls executed.
+[2025-11-30 19:34:28] FAIL | root | ls | Command not found: ls
+[2025-11-30 19:34:28] FAIL | root | ls | Command not found: ls
+[2025-11-30 19:34:28] FAIL | root | ls | Command not found: ls
+[2025-11-30 19:34:28] FAIL | root | ls | Command not found: ls
+[2025-11-30 19:34:28] FAIL | root | ls | Command not found: ls
+[2025-11-30 19:34:28] FAIL | root | ls | Command not found: ls
+[2025-11-30 19:34:28] FAIL | root | mkdir new_dir | Command not found: mkdir
+[2025-11-30 19:37:57] FAIL | root | ls | Command not found: ls
+[2025-11-30 19:37:57] FAIL | root | ls | Command not found: ls
+[2025-11-30 19:37:57] FAIL | root | ls | Command not found: ls
+[2025-11-30 19:37:57] FAIL | root | ls | Command not found: ls
+[2025-11-30 19:37:57] FAIL | root | ls | Command not found: ls
+[2025-11-30 19:37:57] FAIL | root | ls | Command not found: ls
+[2025-11-30 19:37:57] FAIL | root | ls | Command not found: ls
+[2025-11-30 19:37:57] FAIL | root | lsd | Command not found: lsd
+[2025-11-30 19:40:22] OK | root | ls | Ls executed.
+[2025-11-30 19:40:22] OK | root | help | Help displayed.
+[2025-11-30 19:40:22] OK | root | ls | Ls executed.
+[2025-11-30 19:40:22] OK | root | exec new_file1 | Exec script execution cycle finished.
+[2025-11-30 19:40:22] OK | root | cat new_file1 | Cat executed.
+[2025-11-30 19:40:22] OK | root | chmod +x exec_test.txt | Chmod executed.
+[2025-11-30 19:40:22] FAIL | root | execute exec_test.txt | Command not found: execute
+[2025-11-30 19:40:22] OK | root | adduser simon | Adduser executed.
+[2025-11-30 19:40:22] OK | root | exec exec_test.txt | Exec script execution cycle finished.
+[2025-11-30 20:39:25] OK | root | mkdir new_dir | Mkdir executed.
+[2025-11-30 20:39:25] OK | root | cd new_dir | Cd executed.
+[2025-11-30 20:39:25] OK | root | ls | Ls executed.
+[2025-11-30 20:39:25] OK | root | cd .. | Cd executed.
+[2025-11-30 20:40:14] OK | root | ls | Ls executed.
+[2025-11-30 20:40:14] OK | root | cd new_dir | Cd executed.

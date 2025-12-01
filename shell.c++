@@ -3,6 +3,7 @@
 #include <string>
 #include <unordered_map>
 #include <ctime> 
+#include <limits>
 #include "login.c++"
 #include "colonel.c++"
 
@@ -27,18 +28,19 @@ int main() {
 
     login loginHandler;
     colonel shellCommander;
-    std::cout << "DEBUG(MAIN) Colonel componets loaded correctly" << std::endl;
+
 
     login_user(loginHandler);
-    while(loginHandler.isLoggedIn() == true) {
+
+    while (loginHandler.isLoggedIn() == true) {
         std::cout << "Shell>> ";
         std::string command;
-        std::getline(std::cin, command);
+        std::getline(std::cin >> std::ws, command);
         if (command == "exit") {
             loginHandler.setLoggedIn(false);
             std::cout << "Logged out successfully." << std::endl;
         } else {
-            // FIX: Pass the current user object to parseCommand
+            //Pass the current user object to parseCommand
             shellCommander.parseCommand(command, loginHandler.getCurrentUser());
         }
     }

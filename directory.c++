@@ -1,10 +1,11 @@
+#pragma once
 
 #include <iostream>
 #include <vector>
 #include <string>
 #include "file.c++"
 
-struct Directory {
+class Directory {
 private:
     int id;
     int fileIdCounter = 0;
@@ -66,6 +67,7 @@ private:
         return names;
     }
 
+    // Original: returns names only
     std::string getFileNames() const {
         std::string names;
         for (const auto& file : files) {
@@ -75,7 +77,20 @@ private:
         return names;
     }   
 
-    
+    std::string getFileNames(bool withPermissions) const {
+        std::string names;
+        for (const auto& file : files) {
+            if (!names.empty()) names += ", ";
+            if (withPermissions) {
+                // Format: [perms] filename
+                names += "[" + file.getPermissions() + "] " + file.getFileName();
+            } else {
+                names += file.getFileName();
+            }
+        }
+        return names;
+    }
+
 
     std::string toString() const {
         return "Directory[ID=" + std::to_string(id) + ", Name=" + dirName + ",\n" +
@@ -110,4 +125,9 @@ private:
     void addFile(const File& file) {
         files.push_back(file);
     }
+
+    std::vector<File> &getFilesRef() { 
+        return files; 
+    }
 };
+
