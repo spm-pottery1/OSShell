@@ -25,10 +25,7 @@ public:
     command(const std::string &cmd_name, const std::vector<std::string> &cmd_args)
         : name(cmd_name), args(cmd_args) {}
 
-    // Virtual destructor for proper cleanup in derived classes
-    virtual ~command() = default;
-
-    // Accessors
+    // getters
     const std::string &getName() const
     {
         return name;
@@ -64,6 +61,9 @@ public:
         }
         return result;
     }
+
+    // Virtual destructor for proper cleanup in derived classes
+    virtual ~command() = default;
 
     virtual void execute(user &currentUser) = 0; 
 };

@@ -243,9 +243,9 @@ public:
                 directories[parentIndex].addSubdirectory(newDir);
             } else if (entry.is_regular_file(ec) && !ec) {
                 std::string fname = entry.path().filename().string();
-                // --- FIX 2: Skip .perms files when loading files ---  
+                // Skip .perms files when loading files  
                 if (fname.size() > 6 && fname.substr(fname.size() - 6) == ".perms") {
-                    continue; // Skip this file; it's just metadata
+                    continue; // Skip this file
                 }
 
                 fs::path parent = entry.path().parent_path();
@@ -276,10 +276,8 @@ public:
                         permFile.close();
                     }
                 }
-                // --- END FIX 2 ---
 
                 int fid = NextFileId();
-                // File constructor: File(int id, const std::string& name, const std::string& path, const std::string& owner, const std::string& perms, const std::string& content)
                 std::string filePath_virt = (parentV == "/" ? std::string("/") + fname : parentV + "/" + fname);
                 File f(fid, fname, filePath_virt, username, loadedPerms, ""); 
                 files.push_back(f);

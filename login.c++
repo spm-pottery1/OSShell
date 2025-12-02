@@ -52,7 +52,7 @@ class login {
                     std::cout << "Created directory: " << dir_path_obj.string() << std::endl;
                 } catch (const std::exception& e) {
                     std::cout << "Error creating directory: " << e.what() << std::endl;
-                    return; // Stop if directory creation fails
+                    return; 
                 }
             }
 
@@ -61,7 +61,6 @@ class login {
             if (!usersFileCheck.is_open()) {
                 std::ofstream usersFile(filePath);
                 if (usersFile.is_open()) {
-                    // Create the default 'root' user
                     usersFile << "root root" << std::endl; 
                     usersFile.close();
                     std::cout << "Created new users file with default root user." << std::endl;
@@ -76,7 +75,6 @@ class login {
             std::ifstream usersFile(filePath);
             if (!usersFile.is_open()) {
                 std::cerr << "Error: Unable to open users file." << std::endl;
-                // Return a user object with empty username to indicate failure
                 return user("", ""); 
             }
 

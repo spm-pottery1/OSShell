@@ -97,3 +97,100 @@
 [2025-11-30 20:39:25] OK | root | cd .. | Cd executed.
 [2025-11-30 20:40:14] OK | root | ls | Ls executed.
 [2025-11-30 20:40:14] OK | root | cd new_dir | Cd executed.
+[2025-11-30 22:02:26] OK | simon | ls | Ls executed.
+[2025-11-30 22:03:28] OK | simon | mkdir test_scripts | Mkdir executed.
+[2025-11-30 22:03:28] OK | simon | ls | Ls executed.
+[2025-11-30 22:03:28] OK | simon | cd test_scripts | Cd executed.
+[2025-11-30 22:03:28] OK | simon | touch script | Touch executed.
+[2025-11-30 22:03:28] OK | simon | echo "touch advanced_test" >> script | Echo executed.
+[2025-11-30 22:03:28] OK | simon | cat script | Cat executed.
+[2025-11-30 22:03:28] OK | simon | echo "echo "This is an advanced script task" >> script | Echo executed.
+[2025-11-30 22:03:28] OK | simon | cat script | Cat executed.
+[2025-11-30 22:03:28] OK | simon | echo "touch advance_test" >> script | Echo executed.
+[2025-11-30 22:03:28] OK | simon | echo script | Echo executed.
+[2025-11-30 22:03:28] OK | simon | cat script | Cat executed.
+[2025-11-30 22:03:28] OK | simon | echo "echo "test data" > script | Echo executed.
+[2025-11-30 22:03:28] OK | simon | cat script | Cat executed.
+[2025-11-30 22:15:25] OK | simon | cd directory | Cd executed.
+[2025-11-30 22:15:25] OK | simon | ls | Ls executed.
+[2025-11-30 22:15:25] OK | simon | cd test_scipts | Cd executed.
+[2025-11-30 22:15:25] OK | simon | cd test_scripts | Cd executed.
+[2025-11-30 22:15:25] OK | simon | ls | Ls executed.
+[2025-11-30 22:15:25] OK | simon | echo script | Echo executed.
+[2025-11-30 22:15:25] OK | simon | cat script | Cat executed.
+[2025-11-30 22:15:25] OK | simon | echo "touch robust" > script | Echo executed.
+[2025-11-30 22:15:25] OK | simon | cat script | Cat executed.
+[2025-11-30 22:15:25] OK | simon | echo "echo "test data" > robust" >> script | Echo executed.
+[2025-11-30 22:15:25] OK | simon | cat script | Cat executed.
+[2025-11-30 22:24:37] OK | simon | ls | Ls executed.
+[2025-11-30 22:24:37] OK | simon | cd test_scripts | Cd executed.
+[2025-11-30 22:24:37] OK | simon | cd | Cd executed.
+[2025-11-30 22:24:37] OK | simon | ls | Ls executed.
+[2025-11-30 22:24:37] OK | simon | rm bobust | Rm executed.
+[2025-11-30 22:24:37] OK | simon | rm robust | Rm executed.
+[2025-11-30 22:24:37] OK | simon | rm script | Rm executed.
+[2025-11-30 22:27:35] OK | simon | cd test_scripts | Cd executed.
+[2025-11-30 22:27:35] OK | simon | rm robut | Rm executed.
+[2025-11-30 22:30:10] OK | simon | cd test_scripts | Cd executed.
+[2025-11-30 22:30:10] OK | simon | rm robust | Rm executed.
+[2025-11-30 22:30:10] OK | simon | rm robust | Rm executed.
+[2025-11-30 22:30:10] OK | simon | ls | Ls executed.
+[2025-11-30 22:30:10] OK | simon | ls | Ls executed.
+[2025-11-30 22:30:10] OK | simon | ls | Ls executed.
+[2025-11-30 22:30:10] OK | simon | cd .. | Cd executed.
+[2025-11-30 22:30:10] OK | simon | ls | Ls executed.
+[2025-11-30 22:30:10] OK | simon | cd test_scripts | Cd executed.
+[2025-11-30 22:30:10] OK | simon | ls | Ls executed.
+[2025-11-30 22:31:30] OK | simon | cd test_scripts | Cd executed.
+[2025-11-30 22:31:30] OK | simon | ls | Ls executed.
+[2025-11-30 22:31:30] OK | simon | touch script | Touch executed.
+[2025-11-30 22:31:30] OK | simon | echo touch script >> script | Echo executed.
+[2025-11-30 22:31:30] OK | simon | cat script | Cat executed.
+[2025-11-30 22:31:30] OK | simon | echo echo  test data  >> script | Echo executed.
+[2025-11-30 22:31:30] OK | simon | cat script | Cat executed.
+[2025-11-30 23:39:36] OK | simon | cd test_scripts | Cd executed.
+[2025-11-30 23:39:36] OK | simon | ls | Ls executed.
+[2025-11-30 23:39:36] OK | simon | cat script | Cat executed.
+[2025-11-30 23:44:06] OK | simon | cd test_scripts | Cd executed.
+[2025-11-30 23:44:06] OK | simon | ls | Ls executed.
+[2025-11-30 23:44:06] OK | simon | rm script | Rm executed.
+[2025-11-30 23:44:06] OK | simon | ls | Ls executed.
+[2025-11-30 23:44:06] OK | simon | touch script | Touch executed.
+[2025-11-30 23:44:06] OK | simon | ls | Ls executed.
+[2025-11-30 23:44:06] OK | simon | echo touch script >> script | Echo executed.
+[2025-11-30 23:44:06] OK | simon | cat script | Cat executed.
+[2025-11-30 23:44:06] OK | simon | echo echo "test data" >> script_1 | Echo executed.
+[2025-11-30 23:44:06] OK | simon | echo echo "test data" >> script_1 >> script | Echo executed.
+[2025-11-30 23:44:06] OK | simon | cat script | Cat executed.
+[2025-11-30 23:44:06] OK | simon | chmod +x script | Chmod executed.
+[2025-11-30 23:44:06] FAIL | simon | execute script | Command not found: execute
+[2025-11-30 23:53:35] OK | simon | ls | Ls executed.
+[2025-11-30 23:53:35] OK | simon | touch script | Touch executed.
+[2025-11-30 23:53:35] OK | simon | echo test data >> script_1 | Echo executed.
+[2025-11-30 23:53:35] OK | simon | exec script | Exec script execution cycle finished.
+[2025-11-30 23:53:35] OK | simon | ls | Ls executed.
+[2025-11-30 23:53:35] OK | simon | cat script_1 | Cat executed.
+[2025-12-01 00:06:13] OK | simon | ls | Ls executed.
+[2025-12-01 00:06:13] OK | simon | cd test_scripts | Cd executed.
+[2025-12-01 00:06:13] OK | simon | ls | Ls executed.
+[2025-12-01 00:06:13] OK | simon | touch test | Touch executed.
+[2025-12-01 00:07:11] OK | simon | ls | Ls executed.
+[2025-12-01 00:07:11] OK | simon | cd test_scripts | Cd executed.
+[2025-12-01 00:07:11] OK | simon | ls | Ls executed.
+[2025-12-01 00:07:33] OK | simon | ls | Ls executed.
+[2025-12-01 00:07:33] OK | simon | touch script | Touch executed.
+[2025-12-01 00:07:33] OK | simon | echo test data >> script_1 | Echo executed.
+[2025-12-01 00:07:33] OK | simon | exec script | Exec script execution cycle finished.
+[2025-12-01 00:07:33] OK | simon | ls | Ls executed.
+[2025-12-01 00:07:33] OK | simon | cat script1 | Cat executed.
+[2025-12-01 00:08:33] OK | simon | ls | Ls executed.
+[2025-12-01 00:08:33] OK | simon | ls script_2 | Ls executed.
+[2025-12-01 00:08:33] OK | simon | cat script_2 | Cat executed.
+[2025-12-01 00:10:38] OK | simon | cd test_scripts | Cd executed.
+[2025-12-01 00:10:38] OK | simon | echo cd test_scripts >> test | Echo executed.
+[2025-12-01 00:10:38] OK | simon | ls | Ls executed.
+[2025-12-01 10:15:01] OK | simon | ls | Ls executed.
+[2025-12-01 10:15:01] OK | simon | touch script | Touch executed.
+[2025-12-01 10:15:01] OK | simon | echo test data >> script_1 | Echo executed.
+[2025-12-01 10:15:01] OK | simon | exec script | Exec script execution cycle finished.
+[2025-12-01 10:15:01] OK | simon | ls | Ls executed.

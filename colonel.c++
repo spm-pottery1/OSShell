@@ -1,4 +1,3 @@
-#pragma once
 #include <unordered_map>
 #include <string>
 #include <vector>
@@ -9,8 +8,6 @@
 #include <filesystem>  
 #include "command.c++"
 #include "log.c++"              
-
-// FIX 1: INCLUDE ALL REQUIRED COMMAND FILES
 #include "helpCommand.c++"
 #include "addUserCommand.c++"
 #include "mkdirCommand.c++"
@@ -21,6 +18,8 @@
 #include "catCommand.c++"
 #include "rmCommand.c++"
 #include "chmodCommand.c++"
+
+namespace fs = std::filesystem;
 
 
 struct colonel {
@@ -34,9 +33,6 @@ struct colonel {
     // Base path for file system persistence
     std::string baseRoot = "/home/simon/Documents/OSShellRoot"; 
 
-
-    // --- PRIVATE HELPER FUNCTIONS FOR 'exec' ---
-
     // Helper to read the file content from the physical disk
     std::string readPhysicalFileContent(const std::string& physicalPath) {
         std::ifstream file(physicalPath);
@@ -49,157 +45,160 @@ struct colonel {
         return "";
     }
 
-    /**
-     * Executes a script file by reading its content line-by-line and recursively
-     * calling parseCommand for each line.
-     */
-    void executeScript(const std::string &filename, user &currentUser) {
-        // --- 1. Find the file's metadata (in-memory) and check permissions ---
-        const Directory &currentDir = currentUser.getCurrentDirectory();
-        const File *targetFile = nullptr;
-        for (const auto &f : currentDir.getFiles()) {
-            if (f.getFileName() == filename) {
-                targetFile = &f; 
-                break;
-            }
-        }
 
-        if (!targetFile) {
-            std::cerr << "Error: Script file not found: " << filename << std::endl;
-            return;
-        }
-
-        std::string perms = targetFile->getPermissions();
-        if (perms.find('x') == std::string::npos) {
-            std::cerr << "Error: Permission denied. File does not have 'x' (execute) permission." << std::endl;
-            return;
-        }
+    void executeScript(const std::string& filename, user& currentUser) {
+        // 1. Get the physical path to the script file
+        fs::path base = baseRoot;
+        base.append(currentUser.getUsername());
         
-        // --- 2. Construct the physical path ---
-        namespace fs = std::filesystem;
-        fs::path physicalPath = fs::path(baseRoot) / currentUser.getUsername();
-        
-        // Find the parent directory's virtual path
-        std::string vpath = targetFile->getFilePath(); 
-        size_t lastSlash = vpath.rfind('/');
-        std::string parentDirVPath = (lastSlash == std::string::npos || lastSlash == 0) ? "/" : vpath.substr(0, lastSlash);
-
-        // Convert virtual path to relative physical path
-        std::string relPath = parentDirVPath;
-        if (!relPath.empty() && relPath.front() == '/') {
-            relPath.erase(0, 1);
+        std::string vpath = currentUser.getCurrentDirectory().getDirPath();
+        fs::path dir = base;
+        if (vpath != "/")
+        {
+            std::string rel = vpath;
+            if (!rel.empty() && rel.front() == '/')
+                rel.erase(0, 1);
+            dir.append(rel);
         }
+
+        fs::path filePath = dir;
+        filePath.append(filename);
+        filePath = filePath.lexically_normal(); // Ensure path is clean
+
+        // 2. Read file content
+        std::string scriptContent = readPhysicalFileContent(filePath.string());
         
-        physicalPath /= fs::path(relPath);
-        physicalPath /= filename;
-
-        // --- 3. Read the file content from the physical disk ---
-        std::string scriptContent = readPhysicalFileContent(physicalPath.string());
-
         if (scriptContent.empty()) {
-            std::cerr << "Error: Failed to read script content from disk or file is empty: " << physicalPath.string() << std::endl;
+            if (!fs::exists(filePath)) {
+                std::cerr << "Exec Error: Script file not found: " << filePath << std::endl;
+            } else {
+                std::cout << "Exec: Script file is empty or unreadable." << std::endl;
+            }
             return;
         }
 
-        // --- 4. Execute commands line-by-line ---
+        // 3. Process commands line by line
         std::stringstream ss(scriptContent);
         std::string line;
-        int lineNumber = 0;
         
-        std::cout << "--- Executing script: " << targetFile->getFileName() << " ---" << std::endl;
+        std::cout << "--- Executing Script: " << filename << " ---" << std::endl;
 
-        while (std::getline(ss, line))
-        {
-            lineNumber++;
-            // Trim whitespace and skip comments/empty lines
-            line.erase(0, line.find_first_not_of(" \t\r\n"));
-            line.erase(line.find_last_not_of(" \t\r\n") + 1);
+        while (std::getline(ss, line)) {
+            // Trim leading/trailing whitespace
+            line.erase(0, line.find_first_not_of(" \t\n\r"));
+            line.erase(line.find_last_not_of(" \t\n\r") + 1);
 
-            if (line.empty() || line.front() == '#') continue; 
+            if (line.empty() || line.front() == '#') {
+                continue; // Skip empty lines or comments
+            }
             
-            std::cout << "[SCRIPT:" << lineNumber << "] > " << line << std::endl;
-
-            // Call the main dispatcher function on the current colonel instance
-            (*this).parseCommand(line, currentUser);
+            std::cout << "$ " << line << std::endl;
+            
+            // Re-use the existing parseCommand function to execute the line
+            parseCommand(line, currentUser);
         }
-
-        std::cout << "--- Script execution finished ---" << std::endl;
+        std::cout << "--- Script Execution Finished ---" << std::endl;
     }
-    void buildCommand(const std::string& cmd_name, const std::vector<std::string>& cmd_args) {
-        command_id_counter++;
-        command_list[cmd_name] = command_id_counter;
-    }
-
-    public:
     
+    public:
+
     colonel() {
         initColonel();
     }
 
     void initColonel() {
-        // Register commands to assign deterministic IDs
-        buildCommand("help", {});       // ID 1
-        buildCommand("adduser", {});    // ID 2
-        buildCommand("mkdir", {});      // ID 3
-        buildCommand("cd", {});         // ID 4
-        buildCommand("ls", {});         // ID 5
-        buildCommand("exit", {});       // ID 6
-        buildCommand("touch", {});      // ID 7
-        buildCommand("echo", {});       // ID 8
-        buildCommand("cat", {});        // ID 9
-        buildCommand("rm", {});         // ID 10
-        buildCommand("chmod", {});      // ID 11
-        buildCommand("exec", {});       // ID 12 
+        command_list["help"] = 1;
+        command_list["adduser"] = 2;
+        command_list["mkdir"] = 3;
+        command_list["cd"] = 4;
+        command_list["ls"] = 5;
+        command_list["touch"] = 6;
+        command_list["echo"] = 7;
+        command_list["cat"] = 8;
+        command_list["rm"] = 9;
+        command_list["exit"] = 10;
+        command_list["chmod"] = 11;
+        command_list["exec"] = 12; // Add exec
     }
+
 
     const std::string parseCommand(const std::string& user_command, user& currentUser) {
         
+
         // --- Tokenization Logic ---
         std::vector<std::string> args;
         std::string command_name;
-        std::stringstream ss(user_command);
+        std::string current_token;
+        char quote_char = 0;
+        bool in_quotes = false;
         
-        if (!(ss >> command_name)) {
+        // 1. Extract command name by skipping leading whitespace
+        std::stringstream ss_initial(user_command);
+        if (!(ss_initial >> command_name)) {
             return ""; // Empty command
         }
-        std::string arg;
-        while (ss >> arg) {
-            args.push_back(arg);
+
+        // Find the position right after the command name and separating whitespace
+        size_t command_len = command_name.length();
+        size_t start_pos = user_command.find_first_not_of(" \t", command_len);
+        
+        if (start_pos != std::string::npos) {
+            // 2. Process the rest of the string for arguments
+            for (size_t i = start_pos; i < user_command.length(); ++i) {
+                char c = user_command[i];
+
+                if (in_quotes) {
+                    if (c == quote_char) {
+                        // End of quote: The token is complete, push it and reset
+                        in_quotes = false;
+                        quote_char = 0;
+                        args.push_back(current_token);
+                        current_token.clear();
+                    } else {
+                        // Inside quotes: Everything is part of the token
+                        current_token += c;
+                    }
+                } else {
+                    if (c == '"' || c == '\'') {
+                        // Start of quote: Set state
+                        in_quotes = true;
+                        quote_char = c;
+                    } else if (c == ' ' || c == '\t') {
+                        // Whitespace outside quotes is a separator
+                        if (!current_token.empty()) {
+                            args.push_back(current_token);
+                            current_token.clear();
+                        }
+                    } else {
+                        // Regular character
+                        current_token += c;
+                    }
+                }
+            }
+
+            // 3. Push any remaining token after loop finishes (e.g., last non-quoted word)
+            if (!current_token.empty()) {
+                args.push_back(current_token);
+            }
         }
-        // --- End Tokenization Logic ---
 
         std::string result;
         bool success = false;
-                
-        // --- DISPATCHER SWITCH STATEMENT ---
-        // Instantiate and execute the appropriate command based on command_id
-        // 1. Help
-        // 2. AddUser
-        // 3. Mkdir
-        // 4. Cd
-        // 5. Ls
-        // 6. Exit
-        // 7. Touch
-        // 8. Echo
-        // 9. Cat
-        // 10. Rm
-        // 11. Chmod
-        // 12. Exec
 
         if (command_list.count(command_name)) {
-            int command_id = command_list.at(command_name);
+            int command_id = command_list[command_name];
             switch (command_id) {
                 case 1: { // help
                     helpCommand cmd(args);
                     cmd.execute(currentUser);
-                    result = "Help displayed.";
+                    result = "Help executed.";
                     success = true;
                     break;
                 }
                 case 2: { // adduser
                     addUserCommand cmd(args);
                     cmd.execute(currentUser);
-                    result = "Adduser executed.";
+                    result = "AddUser executed.";
                     success = true;
                     break;
                 }
@@ -224,36 +223,37 @@ struct colonel {
                     success = true;
                     break;
                 }
-                case 6: { // exit
-                    result = "Exiting...";
-                    success = true;
-                    break;
-                }
-                case 7: { // touch
+                case 6: { // touch
                     touchCommand cmd(args);
                     cmd.execute(currentUser);
                     result = "Touch executed.";
                     success = true;
                     break;
                 }
-                case 8: { // echo
+                case 7: { // echo
                     echoCommand cmd(args);
                     cmd.execute(currentUser);
                     result = "Echo executed.";
                     success = true;
                     break;
                 }
-                case 9: { // cat
+                case 8: { // cat
                     catCommand cmd(args);
                     cmd.execute(currentUser);
                     result = "Cat executed.";
                     success = true;
                     break;
                 }
-                case 10: { // rm
+                case 9: { // rm
                     rmCommand cmd(args);
                     cmd.execute(currentUser);
                     result = "Rm executed.";
+                    success = true;
+                    break;
+                }
+                case 10: { // exit
+                    // Handled in main shell loop
+                    result = "Exit command.";
                     success = true;
                     break;
                 }
@@ -271,8 +271,7 @@ struct colonel {
                         success = false;
                         break;
                     }
-                    // Call the new private function to handle script execution
-                    (*this).executeScript(args[0], currentUser);
+                    executeScript(args[0], currentUser);
                     result = "Exec script execution cycle finished.";
                     success = true;
                     break;

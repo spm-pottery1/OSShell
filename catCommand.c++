@@ -1,4 +1,3 @@
-
 #pragma once
 #include <iostream>
 #include <string>
@@ -8,10 +7,10 @@
 #include <filesystem>
 #include "directory.c++"
 #include "user.c++"
-#include "command.c++" // Include the base definition
+#include "command.c++" 
 
-// Redefining the struct for abstract base class 'command' to inherit from
-// This structure is necessary because 'command.c++' is not a header.
+
+namespace fs = std::filesystem;
 struct catCommand : public command
 {
 public:
@@ -29,24 +28,26 @@ public:
         const std::string &filename = args[0];
 
         // Map virtual root "/" -> physical base directory for this user
-        std::filesystem::path base = "/home/simon/Documents/OSShellRoot";
-        base /= currentUser.getUsername();
+        fs::path base = "/home/simon/Documents/OSShellRoot";
+        base.append(currentUser.getUsername());
 
         // Determine physical directory that corresponds to the current virtual directory
         std::string vpath = currentUser.getCurrentDirectory().getDirPath();
-        std::filesystem::path dir = base;
+        fs::path dir = base;
         if (vpath != "/")
         {
             std::string rel = vpath;
             if (!rel.empty() && rel.front() == '/')
                 rel.erase(0, 1);
-            dir /= rel;
+            // *** CHANGE 2 ***
+            dir.append(rel);
         }
 
-        std::filesystem::path filePath = dir / filename;
+        fs::path filePath = dir;
+        filePath.append(filename);
 
         // Check if file exists
-        if (!std::filesystem::exists(filePath))
+        if (!fs::exists(filePath))
         {
             std::cerr << "Error: File not found: " << filePath << std::endl;
             return;
@@ -60,11 +61,9 @@ public:
             return;
         }
 
-        std::string line;
-        while (std::getline(ifs, line))
-        {
-            std::cout << line << std::endl;
-        }
+        std::cout << ifs.rdbuf();
+
+        
         ifs.close();
     }
 };

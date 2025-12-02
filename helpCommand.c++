@@ -29,6 +29,8 @@ private:
   chmod <perms> <file>
                       Change file permissions. Use +r/+w/+x (add), -r/-w/-x (remove), or rwx (set).
                       Examples: chmod +rw file.txt, chmod -w file.txt, chmod rwx file.txt
+  exec <scriptfile>
+                      Execute a script file containing OSShell commands line by line
   exit                Exit the shell / logout
 
 Usage notes:
@@ -38,6 +40,7 @@ Usage notes:
   - touch, echo, cat, rm, and chmod operate on the mapped physical path: /home/simon/Documents/OSShellRoot/<username>/...
   - echo supports simple quoting (single token or quoted string).
   - chmod stores permissions in a .perms metadata file (e.g., file.txt.perms contains "rw").
+  - exec reads and executes commands from a script file line by line, scripting hasn't been tested extensively.
 )";
 
 public:

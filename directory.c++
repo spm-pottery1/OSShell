@@ -100,6 +100,14 @@ private:
                "Files=[" + getFileNames() + "]]";
     }
 
+    bool hasFile(const std::string& filename) const {
+        for (const auto& file : files) {
+            if (file.getFileName() == filename) {
+                return true;
+            }
+        }
+        return false;
+    }
     //Setters
 
     void setId(int dirId) {
