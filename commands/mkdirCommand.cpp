@@ -5,9 +5,9 @@
 #include <fstream>
 #include <sstream>
 #include <filesystem>
-#include "directory.c++"
-#include "user.c++"
-#include "command.c++" 
+#include "../file_system/directory.h"
+#include "../file_system/user.h"
+#include "command.h" 
 
 struct mkdirCommand : public command
 {

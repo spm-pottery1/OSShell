@@ -1,12 +1,13 @@
-#pragma once
+#ifndef COMMAND_H
+#define COMMAND_H
 #include <iostream>
 #include <string>
 #include <vector>
 #include <fstream>
 #include <sstream>
 #include <filesystem>
-#include "directory.c++" 
-#include "user.c++"      
+#include "../file_system/directory.h" 
+#include "../file_system/user.h"      
 
 class command
 {
@@ -67,3 +68,4 @@ public:
 
     virtual void execute(user &currentUser) = 0; 
 };
+#endif

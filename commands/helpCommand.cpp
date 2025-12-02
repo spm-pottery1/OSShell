@@ -5,9 +5,9 @@
 #include <fstream>
 #include <sstream>
 #include <filesystem>
-#include "directory.c++"
-#include "user.c++"
-#include "command.c++"
+#include "../file_system/directory.h"
+#include "../file_system/user.h"
+#include "command.h"
 
 // Redefining the struct for abstract base class 'command' to inherit from
 // This structure is necessary because 'command.c++' is not a header.

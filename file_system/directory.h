@@ -1,9 +1,10 @@
-#pragma once
+#ifndef DIRECTORY_H
+#define DIRECTORY_H
 
 #include <iostream>
 #include <vector>
 #include <string>
-#include "file.c++"
+#include "file.h"
 
 class Directory {
 private:
@@ -138,4 +139,4 @@ private:
         return files; 
     }
 };
-
+#endif

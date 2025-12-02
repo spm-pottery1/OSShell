@@ -5,19 +5,20 @@
 #include <sstream>
 #include <utility>
 #include <fstream>     
-#include <filesystem>  
-#include "command.c++"
-#include "log.c++"              
-#include "helpCommand.c++"
-#include "addUserCommand.c++"
-#include "mkdirCommand.c++"
-#include "cdCommand.c++"
-#include "lsCommand.c++"
-#include "touchCommand.c++"
-#include "echoCommand.c++"
-#include "catCommand.c++"
-#include "rmCommand.c++"
-#include "chmodCommand.c++"
+#include <filesystem> 
+#include "log.cpp" 
+#include "file_system/user.h"
+#include "commands/command.h"              
+#include "commands/helpCommand.cpp"
+#include "commands/addUserCommand.cpp"
+#include "commands/mkdirCommand.cpp"
+#include "commands/cdCommand.cpp"
+#include "commands/lsCommand.cpp"
+#include "commands/touchCommand.cpp"
+#include "commands/echoCommand.cpp"
+#include "commands/catCommand.cpp"
+#include "commands/rmCommand.cpp"
+#include "commands/chmodCommand.cpp"
 
 namespace fs = std::filesystem;
 

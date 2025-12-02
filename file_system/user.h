@@ -1,8 +1,8 @@
-#pragma once
-
+#ifndef USER_H
+#define USER_H
 #include <iostream>
 #include <string>
-#include "directory.c++"
+#include "directory.h"
 #include <fstream>
 #include <sstream>
 #include <vector>
@@ -286,3 +286,5 @@ public:
         }
     }
 };
+
+#endif
